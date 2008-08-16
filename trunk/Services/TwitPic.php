@@ -54,6 +54,17 @@ class Services_TwitPic
     protected $password = '';
 
     /**
+     * requestor 
+     * 
+     * Instance of HTTP_Request for doing the HTTP
+     * transport.
+     * 
+     * @var mixed
+     * @access protected
+     */
+    protected $requestor;
+
+    /**
      * options 
      * 
      * @var array
@@ -70,16 +81,19 @@ class Services_TwitPic
      * 
      * Set the username and password for requests.
      * 
-     * @param mixed $username Twitter username
-     * @param mixed $password Twitter password
+     * @param string $username  Twitter username
+     * @param string $password  Twitter password
+     * @param string $requestor Which requestor driver to use, defaults
+     *                          HTTPRequest
      * 
      * @access public
      * @return void
      */
-    public function __construct($username, $password)
+    public function __construct($username, $password, $requestor = 'HTTPRequest')
     {
-        $this->username = $username;
-        $this->password = $password;
+        $this->username  = $username;
+        $this->password  = $password;
+        $this->requestor = $requestor;
     }
 
     /**
@@ -133,25 +147,20 @@ class Services_TwitPic
         $params['username'] = $this->username;
         $params['password'] = $this->password;
 
-        $http = new HTTP_Request($uri,
-                                 array('method'  => 'POST',
-                                       'timeout' => $this->options['timeout'])
-        );
+        $requestor = $this->getRequestor($uri);
+
         foreach ($params as $field => $value) {
             if ($field == 'media') {
-                $http->addFile($field, $value);
+                $requestor->setImage($value);
                 continue;
             }
-            $http->addPostData($field, $value);
-        }
-        $http->addHeader('User-Agent', $this->options['userAgent']);
-        $res = $http->sendRequest();
-        if (PEAR::isError($res)) {
-            throw new Servics_TwitPic_Exception($res->getMessage(), $res->getCode());
+            $requestor->setPostVar($field, $value);
         }
 
-        $code = $http->getResponseCode();
-        $body = $http->getResponseBody();
+        $requestor->sendRequest();
+
+        $code = $requestor->getResponseCode();
+        $body = $requestor->getResponseBody();
         if ($code != 200) {
             throw new Services_TwitPic_Exception($body, $code);
         }
@@ -197,6 +206,48 @@ class Services_TwitPic
                 $this->options[$key] = $value;
             }
         }
+    }
+
+    /**
+     * getOption 
+     * 
+     * Retrieve an option.
+     * 
+     * @param mixed $key Option to get
+     * 
+     * @throws InvalidArgumentException on error
+     * @access public
+     * @return mixed Option value
+     */
+    public function getOption($key)
+    {
+        if (array_key_exists($key, $this->options)) {
+            return $this->options[$key];
+        }
+        throw new InvalidArgumentException();
+    }
+
+    /**
+     * getRequestor 
+     * 
+     * Instantiate the requestor.
+     * 
+     * @param mixed $uri Endpoint URL being queried.
+     * 
+     * @access protected
+     * @return object Instnace of TwitPic_Request_Common
+     */
+    protected function getRequestor($uri)
+    {
+        $class = 'Services_TwitPic_Request_' . $this->requestor;
+        $file  = 'Services/TwitPic/Request/' . $this->requestor . '.php';
+        include_once $file;
+        if (!class_exists($class)) {
+            throw new Services_TwitPic_Exception(
+                'Class ' . $class . ' does not exist'
+            );
+        }
+        return new $class($uri, $this);
     }
 }
 
