@@ -2,6 +2,8 @@
 /**
  * Services_TwitPicTest 
  * 
+ * PHP Version 5.1.0+
+ * 
  * @uses      PHPUnit_Framework_TestCase
  * @category  Services
  * @package   Services_TwitPic
