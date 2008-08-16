@@ -67,8 +67,10 @@ class Services_TwitPic
     /**
      * options 
      * 
+     * Options used by the requestor
+     * 
      * @var array
-     * @see setOptions()
+     * @see setOptions(), getOption()
      * @access protected
      */
     protected $options = array(
@@ -84,7 +86,7 @@ class Services_TwitPic
      * @param string $username  Twitter username
      * @param string $password  Twitter password
      * @param string $requestor Which requestor driver to use, defaults
-     *                          HTTPRequest
+     *                          to HTTPRequest
      * 
      * @access public
      * @return void
