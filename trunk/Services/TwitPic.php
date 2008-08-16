@@ -8,8 +8,8 @@
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
- * @link      http://trac.digg.internal/trac/digg
+ * @license   New BSD License
+ * @link      http://servicestwitpic.googlecode.com
  */
 
 require_once 'HTTP/Request.php';
@@ -18,12 +18,33 @@ require_once 'Services/TwitPic/Exception.php';
 /**
  * Services_TwitPic 
  * 
+ * PHP Interface for uploading pictures to TwitPic API, as well as
+ * posting the pictures with optional status messages to Twitter.
+ * 
+ * <code>
+ * 
+ * $user     = 'username';
+ * $pass     = 'password';
+ * $filename = '/Users/bill/Desktop/images.jpg';
+ * 
+ * $twit = new Services_TwitPic($user, $pass);
+ * try {
+ *     $twit->setOptions(array('timeout' => 10));
+ *     $result = $twit->uploadAndPost($filename, 'testing image upload');
+ *     print_r($result);
+ * } catch (Services_TwitPic_Exception $e) {
+ *     print_r($e->getMessage());
+ *     print_r($e->getCode());
+ * }
+ * 
+ * </code>
+ * 
  * @category  Services
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
- * @link      http://trac.digg.internal/trac/digg
+ * @license   New BSD License
+ * @link      http://servicestwitpic.googlecode.com
  */
 class Services_TwitPic
 {

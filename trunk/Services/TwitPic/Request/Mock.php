@@ -19,7 +19,7 @@ require_once 'Services/TwitPic/Exception.php';
 /**
  * Services_TwitPic_Request_Mock 
  * 
- * Class for mocking response body, code, and surpressing sending data.
+ * Class for mocking response body, code, and supressing sending data.
  * 
  * @uses      Services_TwitPic_Request_HTTPRequest
  * @category  Services
