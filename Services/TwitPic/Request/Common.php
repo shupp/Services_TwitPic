@@ -9,7 +9,7 @@
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link      http://servicestwitpic.googlecode.com
  */
 
@@ -25,7 +25,7 @@ require_once 'Services/TwitPic.php';
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link      http://servicestwitpic.googlecode.com
  */
 abstract class Services_TwitPic_Request_Common
