@@ -9,8 +9,8 @@
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
- * @link      http://trac.digg.internal/trac/digg
+ * @license   New BSD License
+ * @link      http://servicestwitpic.googlecode.com
  */
 
 require_once 'PEAR/Exception.php';
@@ -23,8 +23,8 @@ require_once 'PEAR/Exception.php';
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD
- * @link      http://trac.digg.internal/trac/digg
+ * @license   New BSD License
+ * @link      http://servicestwitpic.googlecode.com
  */
 class Services_TwitPic_Exception extends PEAR_Exception
 {
