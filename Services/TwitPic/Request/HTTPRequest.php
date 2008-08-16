@@ -95,7 +95,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     /**
      * sendRequest 
      * 
-     * Actually send the request to the TwitPic API.
+     * Set the User-Agent and actually send the request to the TwitPic API.
      * 
      * @throws Services_TwitPic_Exception on failure
      * @access public

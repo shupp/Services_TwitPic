@@ -12,7 +12,6 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
-require_once 'HTTP/Request.php';
 require_once 'Services/TwitPic/Exception.php';
 
 /**
@@ -62,12 +61,16 @@ class Services_TwitPic
     /**
      * username 
      * 
+     * Twitter username
+     * 
      * @var string
      * @access protected
      */
     protected $username = '';
     /**
      * password 
+     * 
+     * Twitter password
      * 
      * @var string
      * @access protected
@@ -77,8 +80,8 @@ class Services_TwitPic
     /**
      * requestor 
      * 
-     * Instance of HTTP_Request for doing the HTTP
-     * transport.
+     * Instance of the requestor (HTTP_Request or Mock) for doing the HTTP
+     * transport.  Mock is used for testing, using canned responses.
      * 
      * @var mixed
      * @access protected
@@ -255,10 +258,10 @@ class Services_TwitPic
      * 
      * Instantiate the requestor.
      * 
-     * @param mixed $uri Endpoint URL being queried.
+     * @param string $uri Endpoint URI being queried.
      * 
      * @access protected
-     * @return object Instnace of TwitPic_Request_Common
+     * @return object Instance of TwitPic_Request_Common
      */
     protected function getRequestor($uri)
     {

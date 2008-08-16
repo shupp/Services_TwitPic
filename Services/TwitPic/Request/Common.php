@@ -13,6 +13,8 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+require_once 'Services/TwitPic.php';
+
 /**
  * Services_TwitPic_Request_Common 
  * 
@@ -50,15 +52,6 @@ abstract class Services_TwitPic_Request_Common
     protected $twit;
 
     /**
-     * postVars 
-     * 
-     * Store the 
-     * 
-     * @var mixed
-     * @access protected
-     */
-
-    /**
      * __construct 
      * 
      * Store the endpoing uri and the instance of Services_TwitPic
@@ -78,7 +71,7 @@ abstract class Services_TwitPic_Request_Common
     /**
      * setPostVar 
      * 
-     * Set POST variables.
+     * Set a POST variable.
      * 
      * @param string $field Field name
      * @param mixed  $value Field value
