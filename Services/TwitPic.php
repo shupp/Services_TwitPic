@@ -8,10 +8,13 @@
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD License
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses Services_TwitPic_Exception
+ */
 require_once 'Services/TwitPic/Exception.php';
 
 /**
@@ -42,19 +45,28 @@ require_once 'Services/TwitPic/Exception.php';
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
  * @copyright 2008 Bill Shupp
- * @license   New BSD License
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link      http://servicestwitpic.googlecode.com
  */
 class Services_TwitPic
 {
+    /**
+     *  HTTP Status OK.
+     */
+    const HTTP_STATUS_OK = 200;
+
+    /**
+     *  HTTP Status Internal Server Error.
+     *  This code is only checked in testing.
+     */
+    const HTTP_STATUS_INTERNAL_ERROR = 500;
+
     /**
      * uri 
      * 
      * URI of the TwitPic API server
      * 
      * @var string
-     * @static
-     * @access public
      */
     static public $uri = 'http://twitpic.com/api';
 
@@ -64,7 +76,6 @@ class Services_TwitPic
      * Twitter username
      * 
      * @var string
-     * @access protected
      */
     protected $username = '';
     /**
@@ -73,7 +84,6 @@ class Services_TwitPic
      * Twitter password
      * 
      * @var string
-     * @access protected
      */
     protected $password = '';
 
@@ -84,7 +94,6 @@ class Services_TwitPic
      * transport.  Mock is used for testing, using canned responses.
      * 
      * @var mixed
-     * @access protected
      */
     protected $requestor;
 
@@ -95,7 +104,6 @@ class Services_TwitPic
      * 
      * @var array
      * @see setOptions(), getOption()
-     * @access protected
      */
     protected $options = array(
         'timeout'   => 30,
@@ -111,9 +119,6 @@ class Services_TwitPic
      * @param string $password  Twitter password
      * @param string $requestor Which requestor driver to use, defaults
      *                          to HTTPRequest
-     * 
-     * @access public
-     * @return void
      */
     public function __construct($username, $password, $requestor = 'HTTPRequest')
     {
@@ -129,8 +134,7 @@ class Services_TwitPic
      * 
      * @param mixed $file Image file name to upload
      * 
-     * @access public
-     * @return mixed Results of sendRequest()
+     * @return mixed Results of {@link sendRequest()}
      */
     public function upload($file)
     {
@@ -145,8 +149,7 @@ class Services_TwitPic
      * @param mixed $file    Image file name to upload
      * @param mixed $message Optional message to include in the tweet
      * 
-     * @access public
-     * @return mixed Results of sendRequest()
+     * @return mixed Results of {@link sendRequest()}
      */
     public function uploadAndPost($file, $message = null)
     {
@@ -158,13 +161,18 @@ class Services_TwitPic
     }
 
     /**
-     * Send a request to the TwitPic API
+     * Send a request to the TwitPic API.
+     *
+     * Note that the use of error suppression with simplexml_load_string() below is 
+     * necessary as that function will throw a warning if the string being loaded is
+     * not valid XML.  The documentation only indicates that it will return FALSE on
+     * errors.
      *
      * @param string $endPoint The API endpoint
      * @param array  $params   The API endpoint arguments to pass
      *
      * @throws Services_TwitPic_Exception on error
-     * @return object Instance of SimpleXMLElement 
+     * @return SimpleXMLElement A SimpleXMLElement Object
      */
     protected function sendRequest($endPoint, array $params)
     {
@@ -187,7 +195,7 @@ class Services_TwitPic
 
         $code = $requestor->getResponseCode();
         $body = $requestor->getResponseBody();
-        if ($code != 200) {
+        if ($code != self::HTTP_STATUS_OK) {
             throw new Services_TwitPic_Exception($body, $code);
         }
 
@@ -222,7 +230,6 @@ class Services_TwitPic
      * @param array $options Options to set
      * 
      * @see $options
-     * @access public
      * @return void
      */
     public function setOptions(array $options)
@@ -242,7 +249,6 @@ class Services_TwitPic
      * @param mixed $key Option to get
      * 
      * @throws InvalidArgumentException on error
-     * @access public
      * @return mixed Option value
      */
     public function getOption($key)
@@ -260,8 +266,7 @@ class Services_TwitPic
      * 
      * @param string $uri Endpoint URI being queried.
      * 
-     * @access protected
-     * @return object Instance of TwitPic_Request_Common
+     * @return TwitPic_Request_Common A TwitPic_Request_Common Object
      */
     protected function getRequestor($uri)
     {

@@ -13,10 +13,10 @@
   <email>hostmaster@shupp.org</email>
   <active>yes</active>
  </lead>
- <date>2008-08-16</date>
- <time>11:56:00</time>
+ <date>2008-08-20</date>
+ <time>22:40:00</time>
  <version>
-  <release>0.0.1</release>
+  <release>0.0.2</release>
   <api>0.0.1</api>
  </version>
  <stability>
@@ -24,7 +24,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
- <notes>Initial Release</notes>
+ <notes>* Implemented Chuck Burgess' comments: http://pear.php.net/pepr/pepr-comments-show.php?id=568</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/docs/Services_TwitPic" name="docs/example.php" role="doc" />
@@ -48,6 +48,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>0.0.2</release>
+    <api>0.0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2008-08-20</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+   <notes>* Implemented Chuck Burgess' comments: http://pear.php.net/pepr/pepr-comments-show.php?id=568</notes>
+  </release>
   <release>
    <version>
     <release>0.0.1</release>
