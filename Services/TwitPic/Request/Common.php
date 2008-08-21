@@ -4,7 +4,6 @@
  * 
  * PHP Version 5.1.0+
  * 
- * @abstract
  * @category  Services
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
@@ -13,6 +12,9 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses Services_TwitPic
+ */
 require_once 'Services/TwitPic.php';
 
 /**
@@ -20,7 +22,6 @@ require_once 'Services/TwitPic.php';
  * 
  * Outline the interface for the Request objects.
  * 
- * @abstract
  * @category  Services
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 
@@ -36,7 +37,6 @@ abstract class Services_TwitPic_Request_Common
      * Endpoint being used.
      * 
      * @var mixed
-     * @access protected
      */
     protected $uri;
 
@@ -47,7 +47,6 @@ abstract class Services_TwitPic_Request_Common
      * for getting options.
      * 
      * @var mixed
-     * @access protected
      */
     protected $twit;
 
@@ -56,10 +55,9 @@ abstract class Services_TwitPic_Request_Common
      * 
      * Store the endpoing uri and the instance of Services_TwitPic
      * 
-     * @param string $uri  Endpoint URI.
-     * @param object $twit Services_TwitPic instance
+     * @param string           $uri  Endpoint URI.
+     * @param Services_TwitPic $twit Services_TwitPic instance
      * 
-     * @access public
      * @return void
      */
     public function __construct($uri, Services_TwitPic $twit)
@@ -76,8 +74,6 @@ abstract class Services_TwitPic_Request_Common
      * @param string $field Field name
      * @param mixed  $value Field value
      * 
-     * @abstract
-     * @access public
      * @return void
      */
     abstract public function setPostVar($field, $value);
@@ -89,8 +85,6 @@ abstract class Services_TwitPic_Request_Common
      * 
      * @param mixed $file Filename of the image
      * 
-     * @abstract
-     * @access public
      * @return void
      */
     abstract public function setImage($file);
@@ -100,8 +94,6 @@ abstract class Services_TwitPic_Request_Common
      * 
      * Actually send the request.
      * 
-     * @abstract
-     * @access public
      * @return void
      */
     abstract public function sendRequest();
@@ -111,8 +103,6 @@ abstract class Services_TwitPic_Request_Common
      * 
      * Get the response code.
      * 
-     * @abstract
-     * @access public
      * @return int
      */
     abstract public function getResponseCode();
@@ -122,8 +112,6 @@ abstract class Services_TwitPic_Request_Common
      * 
      * Get the body of the response.
      * 
-     * @abstract
-     * @access public
      * @return string
      */
     abstract public function getResponseBody();

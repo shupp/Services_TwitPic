@@ -13,8 +13,19 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses PHPUnit_Framework_TestCase 
+ */
 require_once 'PHPUnit/Framework/TestCase.php';
+
+/**
+ * @uses Services_TwitPic_Request_Mock 
+ */
 require_once 'Services/TwitPic/Request/Mock.php';
+
+/**
+ * @uses Services_TwitPic 
+ */
 require_once 'Services/TwitPic.php';
 
 /**
@@ -142,7 +153,8 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     public function testUploadSuccess()
     {
         Services_TwitPic_Request_Mock::$responseBody = $this->responseSuccess;
-        Services_TwitPic_Request_Mock::$responseCode = 200;
+        Services_TwitPic_Request_Mock::$responseCode = 
+            Services_TwitPic::HTTP_STATUS_OK;
         $xml = $this->twit->upload('image.jpg');
         $this->assertType('SimpleXMLElement', $xml);
         $this->assertSame((string)$xml->attributes()->status, 'ok');
@@ -159,7 +171,8 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     public function testUploadFailure()
     {
         Services_TwitPic_Request_Mock::$responseBody = $this->responseFailure;
-        Services_TwitPic_Request_Mock::$responseCode = 200;
+        Services_TwitPic_Request_Mock::$responseCode = 
+            Services_TwitPic::HTTP_STATUS_OK;
         try {
             $xml = $this->twit->upload('image.jpg');
         } catch (Services_TwitPic_Exception $e) {
@@ -199,7 +212,8 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     public function testUploadAndPostSuccess()
     {
         Services_TwitPic_Request_Mock::$responseBody = $this->responseSuccess;
-        Services_TwitPic_Request_Mock::$responseCode = 200;
+        Services_TwitPic_Request_Mock::$responseCode = 
+            Services_TwitPic::HTTP_STATUS_OK;
         $xml = $this->twit->uploadAndPost('image.jpg', 'test message');
         $this->assertType('SimpleXMLElement', $xml);
         $this->assertSame((string)$xml->attributes()->status, 'ok');
@@ -235,7 +249,9 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     public function testUploadAndPostFailureExceptionCode500()
     {
         Services_TwitPic_Request_Mock::$responseBody = $this->responseSuccess;
-        Services_TwitPic_Request_Mock::$responseCode = 500;
+        Services_TwitPic_Request_Mock::$responseCode = 
+            Services_TwitPic::HTTP_STATUS_INTERNAL_ERROR;
+
         try {
             $xml = $this->twit->uploadAndPost('image.jpg', 'test message');
         } catch (Services_TwitPic_Exception $e) {

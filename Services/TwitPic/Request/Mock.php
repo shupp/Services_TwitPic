@@ -13,7 +13,14 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses Services_TwitPic_Request_HTTPRequest 
+ */
 require_once 'Services/TwitPic/Request/HTTPRequest.php';
+
+/**
+ * @uses Servics_TwitPic_Exception
+ */
 require_once 'Services/TwitPic/Exception.php';
 
 /**
@@ -37,7 +44,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
      * Canned response body for testing
      * 
      * @var string
-     * @access public
      */
     static public $responseBody;
 
@@ -47,7 +53,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
      * Canned response code for testing
      * 
      * @var string
-     * @access public
      */
     static public $responseCode;
 
@@ -56,7 +61,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
      * 
      * Don't actually send anything
      * 
-     * @access public
      * @return void
      */
     public function sendRequest()
@@ -68,7 +72,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
      * 
      * Return the canned response code
      * 
-     * @access public
      * @return void
      */
     public function getResponseCode()
@@ -81,7 +84,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
      * 
      * Return the canned response body
      * 
-     * @access public
      * @return void
      */
     public function getResponseBody()

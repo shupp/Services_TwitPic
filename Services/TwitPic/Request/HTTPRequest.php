@@ -13,7 +13,14 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses Services_TwitPic_Request_Common 
+ */
 require_once 'Services/TwitPic/Request/Common.php';
+
+/**
+ * @uses HTTP_Request
+ */
 require_once 'HTTP/Request.php';
 
 /**
@@ -37,7 +44,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * Instance of HTTP_Request
      * 
      * @var object
-     * @access protected
      */
     protected $httpRequest;
 
@@ -46,10 +52,9 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * 
      * Set the options, endpoint, and instatiate HTTP_Request
      * 
-     * @param string $uri  URI of the API endpoint
-     * @param object $twit Instance of Services_TwitPic
+     * @param string           $uri  URI of the API endpoint
+     * @param Services_TwitPic $twit Instance of Services_TwitPic
      * 
-     * @access public
      * @return void
      */
     public function __construct($uri, Services_TwitPic $twit)
@@ -69,7 +74,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * @param string $field Field name
      * @param mixed  $value Field value
      * 
-     * @access public
      * @return void
      */
     public function setPostVar($field, $value)
@@ -84,7 +88,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * 
      * @param mixed $file Filename of image.
      * 
-     * @access public
      * @return void
      */
     public function setImage($file)
@@ -98,7 +101,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * Set the User-Agent and actually send the request to the TwitPic API.
      * 
      * @throws Services_TwitPic_Exception on failure
-     * @access public
      * @return void
      */
     public function sendRequest()
@@ -116,7 +118,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * 
      * Get the response code of the request.
      * 
-     * @access public
      * @return int
      */
     public function getResponseCode()
@@ -129,7 +130,6 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
      * 
      * Get the body of the response.
      * 
-     * @access public
      * @return string
      */
     public function getResponseBody()

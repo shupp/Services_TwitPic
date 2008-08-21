@@ -13,6 +13,9 @@
  * @link      http://servicestwitpic.googlecode.com
  */
 
+/**
+ * @uses PEAR_Exception 
+ */
 require_once 'PEAR/Exception.php';
 
 /**
