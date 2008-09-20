@@ -41,6 +41,7 @@ require_once 'Services/TwitPic/Exception.php';
  * 
  * </code>
  * 
+ * @todo      Add support for binary image data option, not just a filename
  * @category  Services
  * @package   Services_TwitPic
  * @author    Bill Shupp <hostmaster@shupp.org> 

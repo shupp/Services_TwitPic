@@ -44,6 +44,11 @@
    <pearinstaller>
     <min>1.4.0</min>
    </pearinstaller>
+   <package>
+    <name>HTTP_Request</name>
+    <channel>pear.php.net</channel>
+    <min>1.4.3</min>
+   </package>
   </required>
  </dependencies>
  <phprelease />
