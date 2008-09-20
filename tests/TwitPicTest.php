@@ -29,8 +29,6 @@ require_once 'Services/TwitPic/Request/Mock.php';
 require_once 'Services/TwitPic.php';
 
 /**
- * Services_TwitPicTest 
- * 
  * All Tests for Services_TwitPic
  * 
  * @uses      PHPUnit_Framework_TestCase
@@ -44,8 +42,6 @@ require_once 'Services/TwitPic.php';
 class Services_TwitPicTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * twit 
-     * 
      * Instance of Services_TwitPic
      * 
      * @var mixed
@@ -54,8 +50,6 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     protected $twit;
 
     /**
-     * responseSuccess 
-     * 
      * Canned success response
      * 
      * @var string
@@ -70,8 +64,6 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
 </rsp>';
 
     /**
-     * responseFailure 
-     * 
      * Canned failure response
      * 
      * @var string
@@ -84,9 +76,7 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * setUp 
-     * 
-     * Instantiate Services_TwitPic with the Mock requestor for each test
+     * Instantiates Services_TwitPic with the Mock requestor for each test
      * 
      * @access public
      * @return void
@@ -97,9 +87,7 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * testConstruct 
-     * 
-     * Make sure that the Services_TwitPic instance is of the right type
+     * Makes sure that the Services_TwitPic instance is of the right type
      * 
      * @access public
      * @return void
@@ -110,9 +98,7 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * testOptionsSuccess 
-     * 
-     * Test setting/getting options successfully
+     * Tests setting/getting options successfully
      * 
      * @access public
      * @return void
@@ -127,11 +113,8 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * testOptionsFailure 
+     * Tests failure of setting/getting options
      * 
-     * Test failure of setting/getting options
-     * 
-     * @expectedException InvalidArgumentException
      * @access public
      * @return void
      */
@@ -139,13 +122,11 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     {
         $options = array('foo' => 5);
         $this->twit->setOptions($options);
-        $this->assertSame($options['foo'], $this->twit->getOption('foo'));
+        $this->assertSame($this->twit->getOption('foo'), null);
     }
 
     /**
-     * testUploadSuccess 
-     * 
-     * Test a successful upload()
+     * Tests a successful upload()
      * 
      * @access public
      * @return void
@@ -155,15 +136,14 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
         Services_TwitPic_Request_Mock::$responseBody = $this->responseSuccess;
         Services_TwitPic_Request_Mock::$responseCode = 
             Services_TwitPic::HTTP_STATUS_OK;
+
         $xml = $this->twit->upload('image.jpg');
         $this->assertType('SimpleXMLElement', $xml);
         $this->assertSame((string)$xml->attributes()->status, 'ok');
     }
 
     /**
-     * testUploadFailure 
-     * 
-     * Test an API error response for upload()
+     * Tests an API error response for upload()
      * 
      * @access public
      * @return void
@@ -181,9 +161,7 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * testUploadFailureExceptionCode500 
-     * 
-     * Test a 500 response from the API web server
+     * Tests a 500 response from the API web server
      * 
      * @access public
      * @return void
@@ -202,9 +180,7 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
 
 
     /**
-     * testUploadAndPostSuccess 
-     * 
-     * Test a successful uploadAndPost()
+     * Tests a successful uploadAndPost()
      * 
      * @access public
      * @return void
@@ -214,15 +190,14 @@ class Services_TwitPicTest extends PHPUnit_Framework_TestCase
         Services_TwitPic_Request_Mock::$responseBody = $this->responseSuccess;
         Services_TwitPic_Request_Mock::$responseCode = 
             Services_TwitPic::HTTP_STATUS_OK;
+
         $xml = $this->twit->uploadAndPost('image.jpg', 'test message');
         $this->assertType('SimpleXMLElement', $xml);
         $this->assertSame((string)$xml->attributes()->status, 'ok');
     }
 
     /**
-     * testUploadAndPostFailure 
-     * 
-     * Test a failure response for uploadAndPost()
+     * Tests a failure response for uploadAndPost()
      * 
      * @access public
      * @return void

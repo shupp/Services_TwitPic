@@ -24,8 +24,6 @@ require_once 'Services/TwitPic/Request/HTTPRequest.php';
 require_once 'Services/TwitPic/Exception.php';
 
 /**
- * Services_TwitPic_Request_Mock 
- * 
  * Class for mocking response body, code, and supressing sending data.
  * 
  * @uses      Services_TwitPic_Request_HTTPRequest
@@ -39,8 +37,6 @@ require_once 'Services/TwitPic/Exception.php';
 class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
 {
     /**
-     * responseBody
-     * 
      * Canned response body for testing
      * 
      * @var string
@@ -48,8 +44,6 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
     static public $responseBody;
 
      /**
-     * responseCode
-     * 
      * Canned response code for testing
      * 
      * @var string
@@ -57,9 +51,7 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
     static public $responseCode;
 
     /**
-     * sendRequest 
-     * 
-     * Don't actually send anything
+     * Doesn't actually send anything
      * 
      * @return void
      */
@@ -68,9 +60,7 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
     }
 
     /**
-     * getResponseCode 
-     * 
-     * Return the canned response code
+     * Returns the canned response code
      * 
      * @return void
      */
@@ -80,9 +70,7 @@ class Services_TwitPic_Request_Mock extends Services_TwitPic_Request_HTTPRequest
     }
 
     /**
-     * getResponseBody 
-     * 
-     * Return the canned response body
+     * Returns the canned response body
      * 
      * @return void
      */

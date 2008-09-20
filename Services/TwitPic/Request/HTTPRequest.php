@@ -24,9 +24,7 @@ require_once 'Services/TwitPic/Request/Common.php';
 require_once 'HTTP/Request.php';
 
 /**
- * Services_TwitPic_Request_HTTPRequest 
- * 
- * HTTP_Request driver.
+ * HTTP_Request driver for Services_TwitPic
  * 
  * @uses      Services_TwitPic_Request_Common
  * @category  Services
@@ -39,8 +37,6 @@ require_once 'HTTP/Request.php';
 class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Common
 {
     /**
-     * httpRequest 
-     * 
      * Instance of HTTP_Request
      * 
      * @var object
@@ -48,9 +44,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     protected $httpRequest;
 
     /**
-     * __construct 
-     * 
-     * Set the options, endpoint, and instatiate HTTP_Request
+     * Sets the options, endpoint, and instatiates HTTP_Request
      * 
      * @param string           $uri  URI of the API endpoint
      * @param Services_TwitPic $twit Instance of Services_TwitPic
@@ -67,9 +61,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     }
 
     /**
-     * setPostVar 
-     * 
-     * Set a POST variable to be sent.
+     * Sets a POST variable.
      * 
      * @param string $field Field name
      * @param mixed  $value Field value
@@ -82,9 +74,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     }
 
     /**
-     * setImage 
-     * 
-     * Set the image filename to be uploaded.
+     * Sets the image filename to be uploaded.
      * 
      * @param mixed $file Filename of image.
      * 
@@ -96,9 +86,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     }
 
     /**
-     * sendRequest 
-     * 
-     * Set the User-Agent and actually send the request to the TwitPic API.
+     * Sets the User-Agent and actually sends the request to the TwitPic API.
      * 
      * @throws Services_TwitPic_Exception on failure
      * @return void
@@ -114,9 +102,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     }
 
     /**
-     * getResponseCode 
-     * 
-     * Get the response code of the request.
+     * Gets the response code of the request.
      * 
      * @return int
      */
@@ -126,9 +112,7 @@ class Services_TwitPic_Request_HTTPRequest extends Services_TwitPic_Request_Comm
     }
 
     /**
-     * getResponseBody 
-     * 
-     * Get the body of the response.
+     * Gets the body of the response.
      * 
      * @return string
      */

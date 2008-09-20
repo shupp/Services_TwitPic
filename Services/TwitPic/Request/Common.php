@@ -18,9 +18,7 @@
 require_once 'Services/TwitPic.php';
 
 /**
- * Services_TwitPic_Request_Common 
- * 
- * Outline the interface for the Request objects.
+ * Outlines the interface for the Request objects.
  * 
  * @category  Services
  * @package   Services_TwitPic
@@ -32,8 +30,6 @@ require_once 'Services/TwitPic.php';
 abstract class Services_TwitPic_Request_Common
 {
     /**
-     * uri 
-     * 
      * Endpoint being used.
      * 
      * @var mixed
@@ -41,8 +37,6 @@ abstract class Services_TwitPic_Request_Common
     protected $uri;
 
     /**
-     * twit 
-     * 
      * Instance of Services_TwitPic.  Used
      * for getting options.
      * 
@@ -51,9 +45,7 @@ abstract class Services_TwitPic_Request_Common
     protected $twit;
 
     /**
-     * __construct 
-     * 
-     * Store the endpoing uri and the instance of Services_TwitPic
+     * Stores the endpoint uri and the instance of Services_TwitPic
      * 
      * @param string           $uri  Endpoint URI.
      * @param Services_TwitPic $twit Services_TwitPic instance
@@ -67,9 +59,7 @@ abstract class Services_TwitPic_Request_Common
     }
 
     /**
-     * setPostVar 
-     * 
-     * Set a POST variable.
+     * Sets a POST variable.
      * 
      * @param string $field Field name
      * @param mixed  $value Field value
@@ -79,9 +69,7 @@ abstract class Services_TwitPic_Request_Common
     abstract public function setPostVar($field, $value);
 
     /**
-     * setImage 
-     * 
-     * Set the image filename to be uploaded.
+     * Sets the image filename to be uploaded.
      * 
      * @param mixed $file Filename of the image
      * 
@@ -90,27 +78,21 @@ abstract class Services_TwitPic_Request_Common
     abstract public function setImage($file);
 
     /**
-     * sendRequest 
-     * 
-     * Actually send the request.
+     * Actually sends the request.
      * 
      * @return void
      */
     abstract public function sendRequest();
 
     /**
-     * getResponseCode 
-     * 
-     * Get the response code.
+     * Gets the response code.
      * 
      * @return int
      */
     abstract public function getResponseCode();
 
     /**
-     * getResponseBody 
-     * 
-     * Get the body of the response.
+     * Gets the body of the response.
      * 
      * @return string
      */

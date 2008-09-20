@@ -19,7 +19,7 @@
 require_once 'PEAR/Exception.php';
 
 /**
- * Services_TwitPic_Exception 
+ * Exception Class for Services_TwitPic
  * 
  * @uses      PEAR_Exception
  * @category  Services

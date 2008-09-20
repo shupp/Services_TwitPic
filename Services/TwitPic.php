@@ -31,7 +31,7 @@ require_once 'Services/TwitPic/Exception.php';
  * 
  * $twit = new Services_TwitPic($user, $pass);
  * try {
- *     $twit->setOptions(array('timeout' => 10));
+ *     $twit->setOption('timeout', 10);
  *     $result = $twit->uploadAndPost($filename, 'testing image upload');
  *     print_r($result);
  * } catch (Services_TwitPic_Exception $e) {
@@ -62,8 +62,6 @@ class Services_TwitPic
     const HTTP_STATUS_INTERNAL_ERROR = 500;
 
     /**
-     * uri 
-     * 
      * URI of the TwitPic API server
      * 
      * @var string
@@ -71,16 +69,12 @@ class Services_TwitPic
     static public $uri = 'http://twitpic.com/api';
 
     /**
-     * username 
-     * 
      * Twitter username
      * 
      * @var string
      */
     protected $username = '';
     /**
-     * password 
-     * 
      * Twitter password
      * 
      * @var string
@@ -88,8 +82,6 @@ class Services_TwitPic
     protected $password = '';
 
     /**
-     * requestor 
-     * 
      * Instance of the requestor (HTTP_Request or Mock) for doing the HTTP
      * transport.  Mock is used for testing, using canned responses.
      * 
@@ -98,12 +90,10 @@ class Services_TwitPic
     protected $requestor;
 
     /**
-     * options 
-     * 
      * Options used by the requestor
      * 
      * @var array
-     * @see setOptions(), getOption()
+     * @see setOption(), setOptions(), getOption()
      */
     protected $options = array(
         'timeout'   => 30,
@@ -111,9 +101,7 @@ class Services_TwitPic
     );
 
     /**
-     * __construct 
-     * 
-     * Set the username and password for requests.
+     * Sets the username and password for requests.
      * 
      * @param string $username  Twitter username
      * @param string $password  Twitter password
@@ -128,9 +116,7 @@ class Services_TwitPic
     }
 
     /**
-     * upload 
-     * 
-     * Upload an image to TwitPic.
+     * Uploads an image to TwitPic.
      * 
      * @param mixed $file Image file name to upload
      * 
@@ -142,9 +128,7 @@ class Services_TwitPic
     }
 
     /**
-     * uploadAndPost 
-     * 
-     * Upload an image and optional message to TwitPic and post to Twitter.
+     * Uploads an image and optional message to TwitPic and posts to Twitter.
      * 
      * @param mixed $file    Image file name to upload
      * @param mixed $message Optional message to include in the tweet
@@ -161,12 +145,7 @@ class Services_TwitPic
     }
 
     /**
-     * Send a request to the TwitPic API.
-     *
-     * Note that the use of error suppression with simplexml_load_string() below is 
-     * necessary as that function will throw a warning if the string being loaded is
-     * not valid XML.  The documentation only indicates that it will return FALSE on
-     * errors.
+     * Sends a request to the TwitPic API.
      *
      * @param string $endPoint The API endpoint
      * @param array  $params   The API endpoint arguments to pass
@@ -205,7 +184,9 @@ class Services_TwitPic
             );
         }
 
-        $xml = @simplexml_load_string($body);
+        // Suppress warnings if $body isn't valid XML
+        libxml_use_internal_errors();
+        $xml = simplexml_load_string($body);
         if (!$xml instanceof SimpleXMLElement) {
             throw new Services_TwitPic_Exception(
                 'Could not parse response received by the API: ' . $body
@@ -223,46 +204,62 @@ class Services_TwitPic
     }
 
     /**
-     * setOptions 
+     * Sets an option.
      * 
-     * Override default options like timeout and user agent.
+     * @param mixed $option Option to set
+     * @param mixed $value  Option value to set
      * 
-     * @param array $options Options to set
+     * @see setOptions(), $options
+     * @return bool true if a valid option was passed, false otherwise
+     */
+    public function setOption($option, $value)
+    {
+        if (!array_key_exists($option, $this->options)) {
+            return false;
+        }
+        $this->options[$option] = $value;
+        return true;
+    }
+
+    /**
+     * Overrides default options.
+     *
+     * Available options:
+     * <pre>
+     * timeout:   Timeout in seconds (default: 30)
+     * userAgent: User-Agent string to be used.
+     *            (default: 'ServicesTwitPic 0.1.0')
+     * </pre>
      * 
-     * @see $options
+     * @param array $options {@link $options} to set
+     * 
+     * @see setOption(), $options
      * @return void
      */
     public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
-            if (array_key_exists($key, $this->options)) {
-                $this->options[$key] = $value;
-            }
+            $this->setOption($key, $value);
         }
     }
 
     /**
-     * getOption 
-     * 
-     * Retrieve an option.
+     * Retrieves an option from {@link $options}.
      * 
      * @param mixed $key Option to get
      * 
-     * @throws InvalidArgumentException on error
-     * @return mixed Option value
+     * @return mixed Option value on success, null on failure
      */
     public function getOption($key)
     {
         if (array_key_exists($key, $this->options)) {
             return $this->options[$key];
         }
-        throw new InvalidArgumentException();
+        return null;
     }
 
     /**
-     * getRequestor 
-     * 
-     * Instantiate the requestor.
+     * Instantiates the requestor.
      * 
      * @param string $uri Endpoint URI being queried.
      * 
